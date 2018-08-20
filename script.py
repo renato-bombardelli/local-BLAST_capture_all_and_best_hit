@@ -1,13 +1,11 @@
 import sys
 from subprocess import Popen
 
-'''
 blastdb = Popen("makeblastdb -in " + sys.argv[2] + " -input_type fasta -dbtype nucl -out db.blastdb", shell=True)
 blastdb.wait()
 
 blastn = Popen("blastn -db db.blastdb -query " + sys.argv[1] + " -evalue 1e-20 -outfmt 6 -out resultado.txt", shell=True)
 blastn.wait()
-'''
 
 query = []
 subject = []
@@ -66,6 +64,7 @@ for i in hits.items():
 	out_list[2].append(tophit)
 	out_list[2].append(tophit_ID)
 	# Write the output file with the 4 colums
+	# Columns ([query ID]; [all hits IDs]; [best hit identity]; [best hit ID])
 	file = f'./results/Out{count}.txt'
 	with open(file, 'w') as output:
 		output.write(''.join(out_list[1])+'\t'+', '.join(out_list[0])+'\t'+'\t'.join(map(str, out_list[2])))
